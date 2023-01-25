@@ -18,9 +18,9 @@ char** GeneralFunc(char** str, int& row, bool begin, bool end, int index = -1) {
     if (str) {
         //коприрование строк из str в newstr
         for (int i = begin, j = 0; i < row - end; i++) {
-            newstr[i] = new char[strlen(str[j])];
+            newstr[i] = new char[strlen(str[j])+1];
             if (i != index) {
-                strcpy_s(newstr[i], strlen(newstr[i]) + strlen(str[j]) + 2, str[j]);
+                strcpy_s(newstr[i], strlen(str[j]) + 1, str[j]);
                 j++;
             }
         }
@@ -32,9 +32,10 @@ char** GeneralFunc(char** str, int& row, bool begin, bool end, int index = -1) {
     else if (end) i = row - 1;
 
     newstr[i] = new char[strlen(subStr) + 1];
-    strcpy_s(newstr[i], strlen(newstr[i]) + strlen(subStr) + 2, subStr);
+    strcpy_s(newstr[i], strlen(subStr) + 1, subStr);
 
     delete[]subStr;
+    if (!str) delete[]str;
     return newstr;
 }
 
